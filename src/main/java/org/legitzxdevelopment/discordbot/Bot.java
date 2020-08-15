@@ -2,6 +2,7 @@ package org.legitzxdevelopment.discordbot;
 
 import net.dv8tion.jda.api.JDABuilder;
 import org.legitzxdevelopment.discordbot.commands.CommandDispatcher;
+import org.legitzxdevelopment.discordbot.firebase.DatabaseConnection;
 import org.legitzxdevelopment.discordbot.utils.Config;
 
 import javax.security.auth.login.LoginException;
@@ -21,6 +22,12 @@ public class Bot {
     }
 
     public static void main(String[] args) throws LoginException {
+        try {
+            DatabaseConnection.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         new Bot();
     }
 }
