@@ -4,6 +4,8 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.legitzxdevelopment.discordbot.Bot;
 import org.legitzxdevelopment.discordbot.commands.CommandContext;
 import org.legitzxdevelopment.discordbot.commands.ICommand;
+import org.legitzxdevelopment.discordbot.firebase.DatabaseApi;
+import org.legitzxdevelopment.discordbot.modules.connect.ConnectModule;
 import org.legitzxdevelopment.discordbot.modules.example.ExampleModule;
 import org.legitzxdevelopment.discordbot.utils.Config;
 
@@ -19,12 +21,15 @@ Legitzx Development © 2020
  */
 
 public class ModuleManager {
+    // Register dependencies
+    private DatabaseApi databaseApi = new DatabaseApi();
+
     // List of Modules
     private final List<IModule> modules = new ArrayList<>();
 
     // Register modules
     public ModuleManager(Bot bot) {
-        addModule(new ExampleModule(bot, this));
+        addModule(new ConnectModule(bot, this));
     }
 
     /**
@@ -112,5 +117,9 @@ public class ModuleManager {
 
     public List<IModule> getModules() {
         return modules;
+    }
+
+    public DatabaseApi getDatabaseApi() {
+        return databaseApi;
     }
 }
