@@ -5,6 +5,7 @@ import com.google.cloud.firestore.*;
 import org.legitzxdevelopment.discordbot.modules.connect.converters.UserConverter;
 import org.legitzxdevelopment.discordbot.modules.connect.user.User;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -82,5 +83,34 @@ public class DatabaseApi {
         } catch (Exception ignored) { }
 
         return user;
+    }
+
+    public List<User> fetchConnections(User user) {
+        List<User> connections = new ArrayList<>();
+        User fetchedUser = null;
+
+        ApiFuture<QuerySnapshot> query = db.collection("users").get();
+        try {
+            QuerySnapshot querySnapshot = query.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for(QueryDocumentSnapshot document : documents) {
+                fetchedUser = userConverter.deserialize(document);
+
+                if (fetchedUser.getId().equalsIgnoreCase(user.getId())) {
+                    continue;
+                }
+
+                for(String interest : user.getInterests()) {
+                    if(fetchedUser.getInterests().contains(interest)) {
+                        if(!user.getConnections().contains(fetchedUser)) {
+                            connections.add(fetchedUser);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception ignored) { }
+
+        return connections;
     }
 }

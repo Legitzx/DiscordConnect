@@ -4,6 +4,8 @@ import org.legitzxdevelopment.discordbot.Bot;
 import org.legitzxdevelopment.discordbot.commands.ICommand;
 import org.legitzxdevelopment.discordbot.modules.IModule;
 import org.legitzxdevelopment.discordbot.modules.ModuleManager;
+import org.legitzxdevelopment.discordbot.modules.connect.commands.ConnectionCommand;
+import org.legitzxdevelopment.discordbot.modules.connect.commands.ConnectionDeleteCommand;
 import org.legitzxdevelopment.discordbot.modules.connect.commands.ProfileEditCommand;
 import org.legitzxdevelopment.discordbot.modules.connect.commands.ViewProfileCommand;
 
@@ -17,6 +19,8 @@ public class ConnectModule implements IModule {
     public ConnectModule(Bot bot, ModuleManager manager) {
         manager.addCommand(this, new ProfileEditCommand(manager));
         manager.addCommand(this, new ViewProfileCommand(manager));
+        manager.addCommand(this, new ConnectionDeleteCommand(manager));
+        manager.addCommand(this, new ConnectionCommand(manager));
     }
 
     @Override

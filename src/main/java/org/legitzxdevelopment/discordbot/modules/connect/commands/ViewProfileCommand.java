@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * Contributor(s): Luciano K
- * Description:
  */
 public class ViewProfileCommand implements ICommand {
     ModuleManager manager;
@@ -30,8 +29,15 @@ public class ViewProfileCommand implements ICommand {
             id = args.get(0);
         }
 
+        if(id.length() == 22) {
+            id = id.substring(3);
+            id = id.replace(">", "");
+        }
+
+        System.out.println(id);
+
         // Checks if id is valid
-        if(id.length() != 18) {
+        if(id.length() != 18 && args.size() == 0) {
             event.getChannel().sendMessage("**Invalid ID**").queue();
             return;
         }
@@ -40,8 +46,7 @@ public class ViewProfileCommand implements ICommand {
 
         // Checks if user is null
         if(user == null) {
-            event.getChannel().sendMessage("**ID Invalid**").queue();
-            return;
+            user = manager.getDatabaseApi().getUserProfile(id);
         }
 
         EmbedBuilder builder = new EmbedBuilder();

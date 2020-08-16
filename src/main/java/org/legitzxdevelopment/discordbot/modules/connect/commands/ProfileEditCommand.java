@@ -13,7 +13,6 @@ import java.util.List;
 
 /**
  * Contributor(s): Luciano K
- * Description:
  */
 public class ProfileEditCommand implements ICommand {
     private ModuleManager manager;

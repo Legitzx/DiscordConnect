@@ -26,8 +26,12 @@ public class ModuleManager {
     // List of Modules
     private final List<IModule> modules = new ArrayList<>();
 
+    // Bot
+    private Bot bot;
+
     // Register modules
     public ModuleManager(Bot bot) {
+        this.bot = bot;
         addModule(new ConnectModule(bot, this));
     }
 
@@ -119,4 +123,8 @@ public class ModuleManager {
     }
 
     public DatabaseApi getDatabaseApi() {return databaseApi;}
+
+    public Bot getBot() {
+        return bot;
+    }
 }
