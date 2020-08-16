@@ -1,10 +1,11 @@
 package org.legitzxdevelopment.discordbot.firebase;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
+import org.legitzxdevelopment.discordbot.modules.connect.converters.UserConverter;
+import org.legitzxdevelopment.discordbot.modules.connect.user.User;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,7 +13,11 @@ import java.util.List;
  * Description: Provides methods that interact with the database
  */
 public class DatabaseApi {
+    // Database
     private Firestore db = DatabaseConnection.getDatabase();
+
+    // Converters
+    private UserConverter userConverter = new UserConverter();
 
     /**
      * Checks if a user exists in the database
@@ -34,5 +39,41 @@ public class DatabaseApi {
         }
 
         return false;
+    }
+
+    public void createUserProfile(User user) {
+        DocumentReference docRef = db.collection("users").document(user.getId());
+
+        docRef.set(userConverter.serialize(user));
+    }
+
+    public void updateUserProfile(User user) {
+
+    }
+
+    /**
+     * Attempts to get a user profile
+     * @param id
+     * @return
+     */
+    public User getUserProfile(String id) {
+        User user = null;
+
+        if(!doesUserExist(id)) {
+            createUserProfile(new User(id, "", "", "", Collections.emptyList(), Collections.emptyList()));
+        }
+
+        ApiFuture<QuerySnapshot> query = db.collection("users").get();
+        try {
+            QuerySnapshot querySnapshot = query.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for(QueryDocumentSnapshot document : documents) {
+                if(document.getId().equalsIgnoreCase(id)) {
+                    user = userConverter.deserialize(document);
+                }
+            }
+        } catch (Exception ignored) { }
+
+        return user;
     }
 }

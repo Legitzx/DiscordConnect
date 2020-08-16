@@ -14,8 +14,7 @@ import java.util.List;
  */
 public class ConnectModule implements IModule {
     public ConnectModule(Bot bot, ModuleManager manager) {
-        System.out.println(manager.getDatabaseApi().doesUserExist("611289956995956736"));
-        manager.addCommand(this, new ViewProfileCommand());
+        manager.addCommand(this, new ViewProfileCommand(manager));
     }
 
     @Override

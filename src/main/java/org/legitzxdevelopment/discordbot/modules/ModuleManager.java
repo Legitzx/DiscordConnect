@@ -119,7 +119,5 @@ public class ModuleManager {
         return modules;
     }
 
-    public DatabaseApi getDatabaseApi() {
-        return databaseApi;
-    }
+    public DatabaseApi getDatabaseApi() {return databaseApi;}
 }
