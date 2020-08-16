@@ -13,14 +13,16 @@ public class User {
     private String location;
     private List<String> interests;
     private List<String> connections;
+    private List<String> finishedConnections;
 
-    public User(String id, String name, String bio, String location, List<String> interests, List<String> connections) {
+    public User(String id, String name, String bio, String location, List<String> interests, List<String> connections, List<String> finishedConnections) {
         this.id = id;
         this.name = name;
         this.bio = bio;
         this.location = location;
         this.interests = interests;
         this.connections = connections;
+        this.finishedConnections = finishedConnections;
     }
 
     public String getId() {
@@ -85,5 +87,14 @@ public class User {
         if(interests.contains(interest)) {
             interests.remove(interest);
         }
+    }
+
+    public void addFinishedConnection(String id) {
+        finishedConnections.add(id);
+    }
+
+
+    public List<String> getFinishedConnections() {
+        return finishedConnections;
     }
 }

@@ -52,7 +52,7 @@ public class DatabaseApi {
         String id = user.getId();
 
         if(!doesUserExist(id)) {
-            createUserProfile(new User(id, "", "", "", Collections.emptyList(), Collections.emptyList()));
+            createUserProfile(new User(id, "", "", "", Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
         }
 
         DocumentReference docRef = db.collection("users").document(id);
@@ -68,7 +68,7 @@ public class DatabaseApi {
         User user = null;
 
         if(!doesUserExist(id)) {
-            createUserProfile(new User(id, "", "", "", Collections.emptyList(), Collections.emptyList()));
+            createUserProfile(new User(id, "", "", "", Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
         }
 
         ApiFuture<QuerySnapshot> query = db.collection("users").get();
@@ -102,7 +102,7 @@ public class DatabaseApi {
 
                 for(String interest : user.getInterests()) {
                     if(fetchedUser.getInterests().contains(interest)) {
-                        if(!user.getConnections().contains(fetchedUser)) {
+                        if(!user.getConnections().contains(fetchedUser) && !user.getFinishedConnections().contains(fetchedUser.getId())) {
                             connections.add(fetchedUser);
                             break;
                         }

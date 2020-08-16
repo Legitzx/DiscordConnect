@@ -21,8 +21,9 @@ public class UserConverter implements Converter<User> {
         String location = doc.getString("location");
         List<String> interests = (List<String>) doc.get("interests");
         List<String> connections = (List<String>) doc.get("connections");
+        List<String> finishedConnections = (List<String>) doc.get("finishedConnections");
 
-        return new User(id, name, bio, location, interests, connections);
+        return new User(id, name, bio, location, interests, connections, finishedConnections);
     }
 
     @Override
@@ -34,6 +35,7 @@ public class UserConverter implements Converter<User> {
         data.put("location", user.getLocation());
         data.put("interests", user.getInterests());
         data.put("connections", user.getConnections());
+        data.put("finishedConnections", user.getFinishedConnections());
 
         return data;
     }

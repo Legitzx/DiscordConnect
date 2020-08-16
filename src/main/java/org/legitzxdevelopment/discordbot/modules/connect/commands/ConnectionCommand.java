@@ -37,7 +37,7 @@ public class ConnectionCommand implements ICommand {
         builder.setColor(Color.CYAN);
 
         if(connections.isEmpty()) {
-            builder.setDescription("**We could not find any connections! Try adding more interests! ``!profile edit interests add <interest>**");
+            builder.setDescription("**We could not find any connections! Try adding more interests! ``!profile edit interests add <interest>``**");
             event.getChannel().sendMessage(builder.build()).queue();
             return;
         }
