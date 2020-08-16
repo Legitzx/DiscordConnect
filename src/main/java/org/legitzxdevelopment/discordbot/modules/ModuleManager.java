@@ -6,7 +6,6 @@ import org.legitzxdevelopment.discordbot.commands.CommandContext;
 import org.legitzxdevelopment.discordbot.commands.ICommand;
 import org.legitzxdevelopment.discordbot.firebase.DatabaseApi;
 import org.legitzxdevelopment.discordbot.modules.connect.ConnectModule;
-import org.legitzxdevelopment.discordbot.modules.example.ExampleModule;
 import org.legitzxdevelopment.discordbot.utils.Config;
 
 import javax.annotation.Nullable;

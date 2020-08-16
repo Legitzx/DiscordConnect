@@ -48,7 +48,14 @@ public class DatabaseApi {
     }
 
     public void updateUserProfile(User user) {
+        String id = user.getId();
 
+        if(!doesUserExist(id)) {
+            createUserProfile(new User(id, "", "", "", Collections.emptyList(), Collections.emptyList()));
+        }
+
+        DocumentReference docRef = db.collection("users").document(id);
+        docRef.update(userConverter.serialize(user));
     }
 
     /**

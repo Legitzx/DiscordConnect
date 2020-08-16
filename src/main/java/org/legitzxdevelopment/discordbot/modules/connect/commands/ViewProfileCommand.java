@@ -30,8 +30,15 @@ public class ViewProfileCommand implements ICommand {
             id = args.get(0);
         }
 
+        // Checks if id is valid
+        if(id.length() != 18) {
+            event.getChannel().sendMessage("**Invalid ID**").queue();
+            return;
+        }
+
         User user = manager.getDatabaseApi().getUserProfile(id);
 
+        // Checks if user is null
         if(user == null) {
             event.getChannel().sendMessage("**ID Invalid**").queue();
             return;

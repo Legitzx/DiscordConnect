@@ -70,4 +70,20 @@ public class User {
     public void setConnections(List<String> connections) {
         this.connections = connections;
     }
+
+    public void addInterest(String interest) {
+        interest = interest.trim();
+        if(interests.contains(interest)) {
+            return;
+        }
+
+        interests.add(interest);
+    }
+
+    public void removeInterest(String interest) {
+        interest = interest.trim();
+        if(interests.contains(interest)) {
+            interests.remove(interest);
+        }
+    }
 }
