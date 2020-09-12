@@ -1,5 +1,7 @@
 # DiscordConnect
-https://devpost.com/software/discord-connect
+https://devpost.com/software/discord-connect 
+
+Won "Best Use of an API"
 
 **Discord Connect Commands**
 ```!profile - Displays your profile (use this command when viewing your own profile)
